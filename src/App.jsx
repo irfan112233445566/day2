@@ -6,6 +6,7 @@ import View from './components/View'
 import Record from './components/Record'
 import Add from './components/Add'
 import { Route, Routes } from 'react-router-dom'
+import Demoaxios from './components/Demoaxios'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,9 +17,10 @@ function App() {
      {/* <Record/> */}
      {/* <Record/> */}
      {/* <Add/> */}
+    
      <View/>
      <Routes>
-      <Route path='/' element={<Record/>}></Route>
+      <Route path='/' element={<Demoaxios/>}></Route>
       <Route path='/add' element={<Add/>}></Route>
 
      </Routes>

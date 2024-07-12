@@ -1,52 +1,52 @@
-import React from 'react'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Steyn', 300, 260, 700, 290),
-  createData('Malinga', 237, 400, 370, 430),
-  createData('Starc', 262, 160, 240, 600),
-  createData('Muralitharan', 305, 370, 670, 430),
-  createData('Sreeshanth', 356, 160, 490, 390),
-];
-
-const Records = () => {
+import React from 'react';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+//
+// const Demoaxios = () => {
+//     const[rows, setRows] = useState();
+//     useEffect(()=>
+//       axios.get('https://dummyjson.com/users').then((res)=>
+//         {
+//             setRows(res.data.users)
+//         }
+//     ))
+const Demoaxios = () => {
+    const [rows, setRows] = useState([]);
+  
+    useEffect(() => {
+      axios.get('https://dummyjson.com/users')
+        .then((res) => {
+          setRows(res.data.users);
+        })
+        .catch((err) => {
+          console.error("Error fetching data: ", err);
+        });
+    }, []);
   return (
     <div>
-      <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 1100 }} aria-label="simple table">
+        <TableContainer component={Paper} sx={{'& td, & th':{border:2}}}>
+      <Table sx={{ minWidth: 650 , backgroundColor:'brown'}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            
-            <TableCell>Bowlers</TableCell>
-            <TableCell align="right">ODI</TableCell>
-            <TableCell align="right">TEST</TableCell>
-            <TableCell align="right">T20</TableCell>
-            <TableCell align="right">DOMESTIC</TableCell>
+            <TableCell><b>First Name</b></TableCell>
+            <TableCell align="right"><b>Last Name</b></TableCell>
+            <TableCell align="right"><b>Gender</b></TableCell>
+            <TableCell align="right"><b>Email</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              key={row.firstName}
             >
               <TableCell component="th" scope="row">
-                {row.name}
+                {row.firstName}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{row.lastName}</TableCell>
+              <TableCell align="right">{row.gender}</TableCell>
+              <TableCell align="right">{row.email}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -56,4 +56,4 @@ const Records = () => {
   )
 }
 
-export default Records
+export default Demoaxios
